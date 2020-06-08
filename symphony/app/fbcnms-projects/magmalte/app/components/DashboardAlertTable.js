@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(1),
   },
   cardTitleIcon: {
-    fill: '#545F77',
+    fill: colors.primary.comet,
     marginRight: theme.spacing(1),
   },
 }));

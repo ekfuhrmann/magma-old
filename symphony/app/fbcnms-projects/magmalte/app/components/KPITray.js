@@ -99,7 +99,7 @@ export default function KPITray(props: Props) {
             </>
           }
           titleTypographyProps={{
-            variant: 'caption',
+            variant: 'body3',
             className: classes.kpiLabel,
             title: kpi.category,
           }}

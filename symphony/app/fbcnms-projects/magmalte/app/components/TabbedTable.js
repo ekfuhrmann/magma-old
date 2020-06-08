@@ -102,10 +102,10 @@ function TabPanel(props: TabPanelProps) {
           alignItems="center"
           justify="center"
           className={classes.emptyTable}>
-          <Grid item className={classes.emptyTableContent}>
+          <Grid item xs={12} className={classes.emptyTableContent}>
             <Text variant="body2">You have 0 {label} Alerts</Text>
             <Text variant="body3">
-              To add alert triggers click <Link href="#">alert settings</Link>.
+              To add alert triggers click <a href="#">alert settings</a>.
             </Text>
           </Grid>
         </Grid>

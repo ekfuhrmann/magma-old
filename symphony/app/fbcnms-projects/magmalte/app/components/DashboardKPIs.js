@@ -11,8 +11,6 @@
 import Card from '@material-ui/core/Card';
 import EnodebKPIs from './EnodebKPIs';
 import GatewayKPIs from './GatewayKPIs';
-import Text from '../theme/design-system/Text';
-import {colors} from '../theme/colors';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
@@ -23,9 +21,6 @@ import {GpsFixed} from '@material-ui/icons';
 import {makeStyles} from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
-  eventsTable: {
-    marginTop: theme.spacing(4),
-  },
   eventsTable: {
     marginTop: theme.spacing(4),
   },

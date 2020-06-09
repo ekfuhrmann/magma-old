@@ -10,7 +10,6 @@
 
 import * as React from 'react';
 import classNames from 'classnames';
-
 import {makeStyles} from '@material-ui/styles';
 import {typography} from '../default';
 

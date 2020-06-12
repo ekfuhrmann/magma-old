@@ -7,17 +7,17 @@
  * @flow
  * @format
  */
-import type {TimeRange} from '@fbcnms/ui/insights/AsyncMetric';
+
+import type {TimeRange} from './AsyncMetric';
 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import React from 'react';
 import Select from '@material-ui/core/Select';
-
 import {makeStyles} from '@material-ui/styles';
 
-const useStyles = makeStyles(_ => ({
+const useStyles = makeStyles(theme => ({
   outlined: {
     color: 'red',
   },
@@ -37,7 +37,8 @@ export default function TimeRangeSelector(props: Props) {
     <FormControl
       variant={props.variant}
       className={
-        (props.className, props.variant === 'outlined' ? classes.outlined : '')
+        (props.className,
+        props.variant === 'outlined' ? classes.outlined : null)
       }>
       {props.variant !== 'outlined' ? (
         <InputLabel htmlFor="time_range">

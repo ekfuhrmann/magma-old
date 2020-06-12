@@ -22,16 +22,6 @@ import {Alarm} from '@material-ui/icons';
 import {CardTitleRow} from './layout/CardTitleRow';
 import {useRouter} from '@fbcnms/ui/hooks';
 
-const useStyles = makeStyles(theme => ({
-  cardTitle: {
-    marginBottom: theme.spacing(1),
-  },
-  cardTitleIcon: {
-    fill: colors.primary.comet,
-    marginRight: theme.spacing(1),
-  },
-}));
-
 type AlertTable = {[string]: Array<RowData>};
 
 type Severity = 'Critical' | 'Major' | 'Minor' | 'Other';

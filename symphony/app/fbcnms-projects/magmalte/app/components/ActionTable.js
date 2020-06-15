@@ -150,6 +150,7 @@ export default function ActionTable<T>(props: ActionTableProps<T>) {
   return (
     <>
       {actionTableJSX}
+      {/* TODO: How do I change the elevation of this component??? */}
       <MaterialTable
         tableRef={props.tableRef}
         components={{

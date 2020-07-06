@@ -9,6 +9,7 @@
  * @format
  */
 import type {subscriber} from '../../../../../fbcnms-packages/fbcnms-magma-api';
+import type {KPIRows} from '../../components/KPIGrid';
 
 import AppBar from '@material-ui/core/AppBar';
 import Card from '@material-ui/core/Card';
@@ -17,7 +18,9 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import DateTimeMetricChart from '../../components/DateTimeMetricChart';
 import DeviceStatusCircle from '@fbcnms/ui/components/icons/DeviceStatusCircle';
 import GraphicEqIcon from '@material-ui/icons/GraphicEq';
+import GpsFixed from '@material-ui/icons/GpsFixed';
 import Grid from '@material-ui/core/Grid';
+import KPIGrid from '../../components/KPIGrid';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 import NestedRouteLink from '@fbcnms/ui/components/NestedRouteLink';
 import Paper from '@material-ui/core/Paper';
@@ -27,10 +30,12 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import SubscriberDetailConfig from './SubscriberDetailConfig';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
-import Text from '@fbcnms/ui/components/design-system/Text';
+import Text from '../../theme/design-system/Text';
 import nullthrows from '@fbcnms/util/nullthrows';
 
 import {Redirect, Route, Switch} from 'react-router-dom';
+import {CardTitleRow} from '../../components/layout/CardTitleRow';
+import {colors} from '../../theme/default';
 import {makeStyles} from '@material-ui/styles';
 import {useRouter} from '@fbcnms/ui/hooks';
 
@@ -41,39 +46,33 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   topBar: {
-    backgroundColor: theme.palette.magmalte.background,
+    backgroundColor: colors.primary.mirage,
     padding: '20px 40px 20px 40px',
+    color: colors.primary.white,
   },
   tabBar: {
-    backgroundColor: theme.palette.magmalte.appbar,
-    padding: '0 0 0 20px',
+    backgroundColor: colors.primary.brightGray,
+    padding: `0 ${theme.spacing(5)}px`,
   },
   tabs: {
-    color: 'white',
+    color: colors.primary.white,
   },
   tab: {
     fontSize: '18px',
     textTransform: 'none',
   },
   tabLabel: {
-    padding: '20px 0 20px 0',
+    padding: '16px 0 16px 0',
+    display: 'flex',
+    alignItems: 'center',
   },
   tabIconLabel: {
-    verticalAlign: 'middle',
-    margin: '0 5px 3px 0',
+    marginRight: '8px',
   },
-  // TODO: remove this when we actually fill out the grid sections
-  contentPlaceholder: {
-    padding: '50px 0',
-  },
+  // TODO: Remove this once event table has been added
   paper: {
-    height: 100,
-    padding: theme.spacing(10),
     textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  card: {
-    variant: 'outlined',
+    padding: theme.spacing(10),
   },
 }));
 
@@ -92,14 +91,12 @@ export default function SubscriberDetail(props: {
   return (
     <>
       <div className={classes.topBar}>
-        <Text color="light" weight="medium">
-          Subscriber/{subscriberId}
-        </Text>
+        <Text variant="body2">Subscriber/{subscriberId}</Text>
       </div>
 
       <AppBar position="static" color="default" className={classes.tabBar}>
-        <Grid container>
-          <Grid item xs={6}>
+        <Grid container direction="row" justify="flex-end" alignItems="center">
+          <Grid item xs={12}>
             <Tabs
               value={tabPos}
               onChange={(event, v) => setTabPos(v)}
@@ -151,23 +148,20 @@ export default function SubscriberDetail(props: {
 
 function Overview(props: {subscriberInfo: subscriber}) {
   const classes = useStyles();
+
   return (
     <div className={classes.dashboardRoot}>
-      <Grid container spacing={3}>
-        <Grid container item xs={12} spacing={3}>
-          <Grid item xs={6}>
-            <Text>
-              <PersonIcon />
-              Subscriber
-            </Text>
-            <Info subscriberInfo={props.subscriberInfo} />
-          </Grid>
-          <Grid item xs={6}>
-            <Text>
-              <GraphicEqIcon />
-              Status
-            </Text>
-            <Status subscriberInfo={props.subscriberInfo} />
+      <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={6} alignItems="center">
+              <CardTitleRow icon={PersonIcon} label="Subscriber" />
+              <Info subscriberInfo={props.subscriberInfo} />
+            </Grid>
+            <Grid item xs={12} md={6} alignItems="center">
+              <CardTitleRow icon={GraphicEqIcon} label="Status" />
+              <Status subscriberInfo={props.subscriberInfo} />
+            </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12}>
@@ -181,11 +175,12 @@ function Overview(props: {subscriberInfo: subscriber}) {
           />
         </Grid>
         <Grid item xs={12}>
-          <Paper>
-            <div className={classes.contentPlaceholder}>
-              Events Table Goes Here
-            </div>
-          </Paper>
+          <Grid item xs={12}>
+            <CardTitleRow icon={GpsFixed} label="Events" />
+            <Paper className={classes.paper} elevation={0}>
+              <Text variant="body2">Event Table Goes Here</Text>
+            </Paper>
+          </Grid>
         </Grid>
       </Grid>
     </div>
@@ -193,109 +188,63 @@ function Overview(props: {subscriberInfo: subscriber}) {
 }
 
 function Info(props: {subscriberInfo: subscriber}) {
-  return (
-    <Grid container>
-      <Grid item xs={12}>
-        <Card variant={'outlined'}>
-          <CardHeader
-            titleTypographyProps={{variant: 'caption'}}
-            subheaderTypographyProps={{variant: 'body1'}}
-            data-testid="Name"
-            subheader={props.subscriberInfo.id}
-          />
-        </Card>
-      </Grid>
-      <Grid container item xs={12}>
-        <Grid item xs={6}>
-          <Card variant={'outlined'}>
-            <CardHeader
-              titleTypographyProps={{variant: 'caption'}}
-              subheaderTypographyProps={{variant: 'body1'}}
-              data-testid="IMSI"
-              title="IMSI"
-              subheader={props.subscriberInfo.id}
-            />
-          </Card>
-        </Grid>
-        <Grid item xs={6}>
-          <Card variant={'outlined'}>
-            <CardHeader
-              titleTypographyProps={{variant: 'caption'}}
-              subheaderTypographyProps={{variant: 'body1'}}
-              data-testid="service"
-              title="Service"
-              subheader={
-                <>
-                  <DeviceStatusCircle
-                    isGrey={false}
-                    isActive={props.subscriberInfo.lte.state === 'ACTIVE'}
-                  />
-                  <Text>{props.subscriberInfo.lte.state}</Text>
-                </>
-              }
-            />
-          </Card>
-        </Grid>
-      </Grid>
-    </Grid>
-  );
+  const kpiData: KPIRows[] = [
+    [
+      {
+        value: props.subscriberInfo.id,
+        statusCircle: false,
+      },
+    ],
+    [
+      {
+        category: 'IMSI',
+        value: props.subscriberInfo.id,
+        statusCircle: false,
+      },
+      {
+        category: 'Service',
+        value: props.subscriberInfo.lte.state,
+        statusCircle: true,
+        status: props.subscriberInfo.lte.state === 'ACTIVE',
+      },
+    ],
+  ];
+
+  return <KPIGrid data={kpiData} />;
 }
 
 function Status(props: {subscriberInfo: subscriber}) {
   const featureUnsupported = 'Unsupported';
   const statusUnknown = 'Unknown';
-  return (
-    <Grid container>
-      <Grid container item xs={12}>
-        <Grid item xs={6}>
-          <Card variant={'outlined'}>
-            <CardHeader
-              titleTypographyProps={{variant: 'caption'}}
-              subheaderTypographyProps={{variant: 'body1'}}
-              title="Gateway ID"
-              subheader={featureUnsupported}
-            />
-          </Card>
-        </Grid>
-        <Grid item xs={6}>
-          <Card variant={'outlined'}>
-            <CardHeader
-              titleTypographyProps={{variant: 'caption'}}
-              subheaderTypographyProps={{variant: 'body1'}}
-              title="eNodeB SN"
-              subheader={featureUnsupported}
-            />
-          </Card>
-        </Grid>
-      </Grid>
-      <Grid container item xs={12}>
-        <Grid item xs={6}>
-          <Card variant={'outlined'}>
-            <CardHeader
-              titleTypographyProps={{variant: 'caption'}}
-              subheaderTypographyProps={{variant: 'body1'}}
-              title="Connection Status"
-              subheader={statusUnknown}
-            />
-          </Card>
-        </Grid>
-        <Grid item xs={6}>
-          <Card variant={'outlined'}>
-            <CardHeader
-              titleTypographyProps={{variant: 'caption'}}
-              subheaderTypographyProps={{variant: 'body1'}}
-              data-testid="UE Latency"
-              title="UE Latency"
-              subheader={
-                props.subscriberInfo.monitoring?.icmp?.latency_ms ??
-                statusUnknown
-              }
-            />
-          </Card>
-        </Grid>
-      </Grid>
-    </Grid>
-  );
+
+  const kpiData: KPIRows[] = [
+    [
+      {
+        category: 'Gateway ID',
+        value: featureUnsupported,
+        statusCircle: false,
+      },
+      {
+        category: 'eNodeB SN',
+        value: featureUnsupported,
+        statusCircle: false,
+      },
+    ],
+    [
+      {
+        category: 'Connection Status',
+        value: statusUnknown,
+        statusCircle: false,
+      },
+      {
+        category: 'UE Latency',
+        value: statusUnknown,
+        statusCircle: false,
+      },
+    ],
+  ];
+
+  return <KPIGrid data={kpiData} />;
 }
 
 function OverviewTabLabel() {

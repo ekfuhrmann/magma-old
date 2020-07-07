@@ -163,6 +163,18 @@ function LteNetworkDashboard({startEnd}: {startEnd: [moment, moment]}) {
           <DashboardAlertTable />
         </Grid>
 
+        <Grid item xs={6}>
+          <Paper>
+            <GatewayKPIs />
+          </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper elevation={2}>
+            <EnodebKPIs />
+          </Paper>
+        </Grid>
+
         <Grid item xs={12}>
           {/* <Text>
             <GpsFixed /> Events

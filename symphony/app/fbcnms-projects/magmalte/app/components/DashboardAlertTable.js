@@ -22,6 +22,15 @@ import {Alarm} from '@material-ui/icons';
 import {CardTitleRow} from './layout/CardTitleRow';
 import {useRouter} from '@fbcnms/ui/hooks';
 
+const useStyles = makeStyles(theme => ({
+  cardTitle: {
+    marginBottom: theme.spacing(1),
+  },
+  cardTitleIcon: {
+    marginRight: theme.spacing(1),
+  },
+}));
+
 type AlertTable = {[string]: Array<RowData>};
 
 type Severity = 'Critical' | 'Major' | 'Minor' | 'Other';
@@ -34,6 +43,7 @@ const severityMap: {[string]: Severity} = {
 };
 
 export default function() {
+  const classes = useStyles();
   const {match} = useRouter();
   const networkId: string = nullthrows(match.params.networkId);
 

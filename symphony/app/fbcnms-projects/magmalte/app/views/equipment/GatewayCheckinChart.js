@@ -31,9 +31,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     minWidth: 150,
   },
-  cardFilters: {
-    marginBottom: theme.spacing(1),
-  },
 }));
 
 export default function() {

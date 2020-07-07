@@ -34,7 +34,6 @@ const severityMap: {[string]: Severity} = {
 };
 
 export default function() {
-  const classes = useStyles();
   const {match} = useRouter();
   const networkId: string = nullthrows(match.params.networkId);
 

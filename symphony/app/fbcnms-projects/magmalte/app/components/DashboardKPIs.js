@@ -24,6 +24,9 @@ const useStyles = makeStyles(theme => ({
   eventsTable: {
     marginTop: theme.spacing(4),
   },
+  eventsTable: {
+    marginTop: theme.spacing(4),
+  },
 }));
 
 export default function() {

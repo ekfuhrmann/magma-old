@@ -166,29 +166,6 @@ function LteNetworkDashboard({startEnd}: {startEnd: [moment, moment]}) {
         <Grid item xs={12}>
           <DashboardKPIs />
         </Grid>
-
-        {/* <Grid item xs={6}>
-          <Paper>
-            <GatewayKPIs />
-          </Paper>
-        </Grid>
-
-        <Grid item xs={6}>
-          <Paper elevation={2}>
-            <EnodebKPIs />
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12}>
-          {/* <Text>
-            <GpsFixed /> Events
-          </Text>
-          <EventsTable
-            eventTypes={magmaEventTypes.NETWORK}
-            gatewayHardwareId={'f9a9fc7c-7977-474d-9617-8a309479f2bb'}
-          /> */}
-          <DashboardKPIs />
-        </Grid>
       </Grid>
     </div>
   );

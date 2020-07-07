@@ -163,7 +163,11 @@ function LteNetworkDashboard({startEnd}: {startEnd: [moment, moment]}) {
           <DashboardAlertTable />
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={12}>
+          <DashboardKPIs />
+        </Grid>
+
+        {/* <Grid item xs={6}>
           <Paper>
             <GatewayKPIs />
           </Paper>
